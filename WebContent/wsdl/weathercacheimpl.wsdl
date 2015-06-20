@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="WeatherCache" targetNamespace="http://webservices/kubatj" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservices/kubatj" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:message name="getWeatherForLocation">
+    <wsdl:part name="arg0" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCitiesForLocation">
+    <wsdl:part name="arg0" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadSelectionResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveSelectionResponse">
+  </wsdl:message>
+  <wsdl:message name="loadSelection">
+    <wsdl:part name="arg0" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCitiesForLocationResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveSelection">
+    <wsdl:part name="arg0" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="arg1" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWeatherForLocationResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WeatherCache">
+    <wsdl:operation name="getWeatherForLocation">
+      <wsdl:input name="getWeatherForLocation" message="tns:getWeatherForLocation">
+    </wsdl:input>
+      <wsdl:output name="getWeatherForLocationResponse" message="tns:getWeatherForLocationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveSelection">
+      <wsdl:input name="saveSelection" message="tns:saveSelection">
+    </wsdl:input>
+      <wsdl:output name="saveSelectionResponse" message="tns:saveSelectionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCitiesForLocation">
+      <wsdl:input name="getCitiesForLocation" message="tns:getCitiesForLocation">
+    </wsdl:input>
+      <wsdl:output name="getCitiesForLocationResponse" message="tns:getCitiesForLocationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadSelection">
+      <wsdl:input name="loadSelection" message="tns:loadSelection">
+    </wsdl:input>
+      <wsdl:output name="loadSelectionResponse" message="tns:loadSelectionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WeatherCacheSoapBinding" type="tns:WeatherCache">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getWeatherForLocation">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="getWeatherForLocation">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="getWeatherForLocationResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveSelection">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="saveSelection">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="saveSelectionResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCitiesForLocation">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="getCitiesForLocation">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="getCitiesForLocationResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadSelection">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="loadSelection">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="loadSelectionResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WeatherCache">
+    <wsdl:port name="WeatherCacheImplPort" binding="tns:WeatherCacheSoapBinding">
+      <soap:address location="http://localhost:8080/WeatherChecker/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
