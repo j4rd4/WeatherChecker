@@ -1,17 +1,15 @@
 package kubatj.weatherChecker;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.UriBuilder;
-import javax.xml.parsers.ParserConfigurationException;
 
 import kubatj.weatherChecker.data.City;
 import kubatj.weatherChecker.tools.Configuration;
-import kubatj.weatherChecker.tools.XMLParser;
+import kubatj.weatherChecker.tools.JSONParser;
 
-import org.xml.sax.SAXException;
+import org.codehaus.jettison.json.JSONException;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -22,29 +20,36 @@ public class CitiesClient {
 	
 	private List<City> cities;
 	
-	public CitiesClient(String country) {
+	public CitiesClient(String latitude, String longitude) {
 		cities = new ArrayList<City>();
-		loadCitiesToCache(country.replaceAll(" ", "%20"));
+		loadCitiesToCache(latitude, longitude);
 	}
 	
-	public void loadCitiesToCache(String country) {
+	public void loadCitiesToCache(String latitude, String longitude) {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		UriBuilder uriBuilder = UriBuilder.fromUri(Configuration.CITIES_URL);
-		uriBuilder.queryParam("CountryName", country);
+		UriBuilder uriBuilder = UriBuilder.fromUri(
+			Configuration.CITIES_URL
+			+ latitude
+			+ Configuration.CITIES_DELIMITER
+			+ longitude + ".json"
+		);
 		WebResource service = client.resource(uriBuilder.build());
-		String xml = service.get(String.class).replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-		
+		String json = service.get(String.class);
+/*
+		System.out.println("------------------------------------");
+		System.out.println(Configuration.CITIES_URL
+			+ latitude
+			+ Configuration.CITIES_DELIMITER
+			+ longitude + ".json");
+	    System.out.println(json);
+	    System.out.println("------------------------------------");
+*/
+
 		try {
-			cities = XMLParser.getCitiesFromXml(xml);
-		} catch (ParserConfigurationException ex) {
-			System.out.println("Exception 'ParserConfigurationException' occured while parsing the xml: " + ex.getMessage());
-			return;
-		} catch (SAXException ex) {
-			System.out.println("Exception 'SAXException' occured while parsing the xml: " + ex.getMessage());
-			return;
-		} catch (IOException ex) {
-			System.out.println("Exception 'IOException' occured while parsing the xml: " + ex.getMessage());
+			cities = JSONParser.getCitiesFromJson(json);
+		} catch (JSONException ex) {
+			System.out.println("Exception 'JSONException' occured while parsing the json: " + ex.getMessage());
 			return;
 		}
 	}

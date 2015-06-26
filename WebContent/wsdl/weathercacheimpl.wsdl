@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="WeatherCache" targetNamespace="http://webservices/kubatj" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservices/kubatj" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:message name="getWeatherForLocation">
-    <wsdl:part name="arg0" type="xsd:string">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getCitiesForLocation">
-    <wsdl:part name="arg0" type="xsd:string">
+    <wsdl:part name="locationJson" type="xsd:string">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="loadSelectionResponse">
@@ -15,17 +11,17 @@
   <wsdl:message name="saveSelectionResponse">
   </wsdl:message>
   <wsdl:message name="loadSelection">
-    <wsdl:part name="arg0" type="xsd:string">
+    <wsdl:part name="countryCode" type="xsd:string">
     </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getCitiesForLocationResponse">
-    <wsdl:part name="return" type="xsd:string">
+    <wsdl:part name="zip" type="xsd:string">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="saveSelection">
-    <wsdl:part name="arg0" type="xsd:string">
+    <wsdl:part name="locationJson" type="xsd:string">
     </wsdl:part>
-    <wsdl:part name="arg1" type="xsd:string">
+    <wsdl:part name="countryCode" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="zip" type="xsd:string">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getWeatherForLocationResponse">
@@ -43,12 +39,6 @@
       <wsdl:input name="saveSelection" message="tns:saveSelection">
     </wsdl:input>
       <wsdl:output name="saveSelectionResponse" message="tns:saveSelectionResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getCitiesForLocation">
-      <wsdl:input name="getCitiesForLocation" message="tns:getCitiesForLocation">
-    </wsdl:input>
-      <wsdl:output name="getCitiesForLocationResponse" message="tns:getCitiesForLocationResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="loadSelection">
@@ -75,15 +65,6 @@
         <soap:body use="literal" namespace="http://webservices/kubatj"/>
       </wsdl:input>
       <wsdl:output name="saveSelectionResponse">
-        <soap:body use="literal" namespace="http://webservices/kubatj"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getCitiesForLocation">
-      <soap:operation soapAction="" style="rpc"/>
-      <wsdl:input name="getCitiesForLocation">
-        <soap:body use="literal" namespace="http://webservices/kubatj"/>
-      </wsdl:input>
-      <wsdl:output name="getCitiesForLocationResponse">
         <soap:body use="literal" namespace="http://webservices/kubatj"/>
       </wsdl:output>
     </wsdl:operation>

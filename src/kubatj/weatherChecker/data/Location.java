@@ -7,20 +7,26 @@ public class Location {
 	private String adminDistrict;
 	private String adminDistrict2;
 	private String countryRegion;
+	private String latitude;
+	private String longitude;
 	
-	public Location(String ad, String ad2, String cr) {
+	public Location(String ad, String ad2, String cr, String lat, String lon) {
 		adminDistrict = ad;
 		adminDistrict2 = ad2;
 		countryRegion = cr;
+		latitude = lat;
+		longitude = lon;
 	}
 	
 	public Location(String json) {
 		try {
-		JSONObject jsonObj = new JSONObject(json);
-		
-		adminDistrict = jsonObj.getString("adminDistrict");
-		adminDistrict2 = jsonObj.getString("adminDistrict2");
-		countryRegion = jsonObj.getString("countryRegion");
+			JSONObject jsonObj = new JSONObject(json);
+			
+			adminDistrict = jsonObj.getString("adminDistrict");
+			adminDistrict2 = jsonObj.getString("adminDistrict2");
+			countryRegion = jsonObj.getString("countryRegion");
+			latitude = jsonObj.getString("latitude");
+			longitude = jsonObj.getString("longitude");
 		} catch (JSONException e) {
 			
 		}
@@ -37,6 +43,14 @@ public class Location {
 	public String getCountryRegion() {
 		return countryRegion;
 	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
 	
 	@Override
 	public String toString() {
@@ -44,6 +58,15 @@ public class Location {
 	}
 	
 	public String toJson() {
-		return "{ 'countryRegion':'" + countryRegion + "', 'adminDistrict':'" + adminDistrict + ((adminDistrict2 == null) ? "" : "', 'adminDistrict2':'" + adminDistrict2) + "'}";
+		return "{ "
+				+ "'countryRegion':'" + countryRegion + "', "
+				+ "'adminDistrict':'" + adminDistrict + ((adminDistrict2 == null) ? "" : "', 'adminDistrict2':'" + adminDistrict2) + "', "
+				+ "'latitude':'" + latitude + "', "
+				+ "'longitude':'" + longitude + "'"
+				+ "}";
+	}
+	
+	public boolean isEmpty() {
+		return this.getCountryRegion() == null || this.getCountryRegion().isEmpty();
 	}
 }

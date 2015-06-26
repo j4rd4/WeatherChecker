@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="WeatherCheckerImplService" targetNamespace="http://weatherChecker.kubatj/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://weatherChecker.kubatj/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://webservices/kubatj" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://webservices/kubatj" location="WeatherChecker.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="WeatherCheckerImplServiceSoapBinding" type="ns1:WeatherChecker">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cacheLocationByCountryAndZIP">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="cacheLocationByCountryAndZIP">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="cacheLocationByCountryAndZIPResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWeatherByCountryAndZIP">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="getWeatherByCountryAndZIP">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="getWeatherByCountryAndZIPResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStationsByCountryAndZIP">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="getStationsByCountryAndZIP">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:input>
+      <wsdl:output name="getStationsByCountryAndZIPResponse">
+        <soap:body use="literal" namespace="http://webservices/kubatj"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WeatherCheckerImplService">
+    <wsdl:port name="WeatherCheckerImplPort" binding="tns:WeatherCheckerImplServiceSoapBinding">
+      <soap:address location="http://localhost:8080/WeatherChecker/services/WeatherCheckerImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

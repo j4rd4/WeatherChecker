@@ -13,4 +13,12 @@
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://webservices/kubatj"
+		id="weatherchecker" implementor="kubatj.weatherChecker.WeatherCheckerImpl"
+		wsdlLocation="wsdl/weathercheckerimpl.wsdl" endpointName="tns:WeatherCheckerImplPort"
+		serviceName="tns:WeatherCheckerImplService" address="/WeatherCheckerImplPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
 </beans>

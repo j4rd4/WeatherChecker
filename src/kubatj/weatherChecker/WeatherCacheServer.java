@@ -6,9 +6,13 @@ public class WeatherCacheServer {
 
     protected WeatherCacheServer() throws Exception {
         System.out.println("Starting Server");
-        Object implementor = new WeatherCacheImpl();
-        String address = "http://localhost:8080/WeatherChecker/services/WeatherCacheImplPort";
-        Endpoint.publish(address, implementor);
+        Object cacheImplementor = new WeatherCacheImpl();
+        String cacheAddress = "http://localhost:8080/WeatherChecker/services/WeatherCacheImplPort";
+        Endpoint.publish(cacheAddress, cacheImplementor);
+        
+        Object checkerImplementor = new WeatherCheckerImpl();
+        String checkerAddress = "http://localhost:8080/WeatherChecker/services/WeatherCheckerImplPort";
+        Endpoint.publish(checkerAddress, checkerImplementor);
     }
     
     public static void main(String args[]) throws Exception { 

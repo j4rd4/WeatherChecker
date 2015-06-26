@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="WeatherChecker" targetNamespace="http://webservices/kubatj" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://webservices/kubatj">
+  <wsdl:message name="cacheLocationByCountryAndZIP">
+    <wsdl:part name="countryCode" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="zip" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="locationJson" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWeatherByCountryAndZIP">
+    <wsdl:part name="countryCode" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="zip" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cacheLocationByCountryAndZIPResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStationsByCountryAndZIP">
+    <wsdl:part name="countryCode" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="zip" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWeatherByCountryAndZIPResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="cached" type="xsd:boolean">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStationsByCountryAndZIPResponse">
+    <wsdl:part name="return" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WeatherChecker">
+    <wsdl:operation name="cacheLocationByCountryAndZIP">
+      <wsdl:input name="cacheLocationByCountryAndZIP" message="ns1:cacheLocationByCountryAndZIP">
+    </wsdl:input>
+      <wsdl:output name="cacheLocationByCountryAndZIPResponse" message="ns1:cacheLocationByCountryAndZIPResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWeatherByCountryAndZIP" parameterOrder="countryCode zip cached">
+      <wsdl:input name="getWeatherByCountryAndZIP" message="ns1:getWeatherByCountryAndZIP">
+    </wsdl:input>
+      <wsdl:output name="getWeatherByCountryAndZIPResponse" message="ns1:getWeatherByCountryAndZIPResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStationsByCountryAndZIP">
+      <wsdl:input name="getStationsByCountryAndZIP" message="ns1:getStationsByCountryAndZIP">
+    </wsdl:input>
+      <wsdl:output name="getStationsByCountryAndZIPResponse" message="ns1:getStationsByCountryAndZIPResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

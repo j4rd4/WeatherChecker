@@ -1,48 +1,60 @@
 package kubatj.weatherChecker;
 
-import java.io.IOException;
-
 import javax.ws.rs.core.UriBuilder;
-import javax.xml.parsers.ParserConfigurationException;
 
 import kubatj.weatherChecker.tools.Configuration;
-import kubatj.weatherChecker.tools.XMLParser;
+import kubatj.weatherChecker.tools.JSONParser;
 
-import org.xml.sax.SAXException;
+import org.codehaus.jettison.json.JSONException;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+/**
+ * This is client class for the weather service. In the time of it's creation
+ * it loads actual weather info in given location and that is accessible 
+ * through the getWeather function as a string.
+ * 
+ * @author Jaroslav Kubat
+ *
+ */
 public class WeatherClient {
 	
 	private String weather;
 	
-	public WeatherClient(String country, String city) {
+	public WeatherClient(String lat, String lon) {
 		weather = null;
-		loadWeatherToCache(country, city);
+		loadWeatherToCache(lat, lon);
 	}
 	
-	public void loadWeatherToCache(String country, String city) {
+	public void loadWeatherToCache(String lat, String lon) {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		UriBuilder uriBuilder = UriBuilder.fromUri(Configuration.WEATHER_URL);
-		uriBuilder.queryParam("CountryName", country);
-		uriBuilder.queryParam("CityName", city);
+		UriBuilder uriBuilder = UriBuilder.fromUri(
+				Configuration.WEATHER_URL
+				+ lat
+				+ ","
+				+ lon
+				+ ".json"
+			);
+		
+/*		
+		System.out.println(Configuration.WEATHER_URL
+				+ lat
+				+ ","
+				+ lon
+				+ ".json");
+*/
+		
 		WebResource service = client.resource(uriBuilder.build());
-		String xml = service.get(String.class).replaceAll(".*\\?>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+		String json = service.get(String.class);
 		
 		try {
-			weather = XMLParser.getWeatherFromXml(xml);
-		} catch (ParserConfigurationException ex) {
-			System.out.println("Exception 'ParserConfigurationException' occured while parsing the xml: " + ex.getMessage());
-			return;
-		} catch (SAXException ex) {
-			System.out.println("Exception 'SAXException' occured while parsing the xml: " + ex.getMessage());
-			return;
-		} catch (IOException ex) {
-			System.out.println("Exception 'IOException' occured while parsing the xml: " + ex.getMessage());
+			weather = JSONParser.getWeatherFromJson(json);
+		} catch (JSONException ex) {
+			System.out.println("Exception 'JSONException' occured while parsing the json: " + ex.getMessage());
 			return;
 		}
 	}
