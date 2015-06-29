@@ -2,9 +2,9 @@ package kubatj.weatherChecker;
 
 import javax.xml.ws.Endpoint;
 
-public class WeatherCacheServer {
+public class RunServer {
 
-    protected WeatherCacheServer() throws Exception {
+    protected RunServer() throws Exception {
         System.out.println("Starting Server");
         Object cacheImplementor = new WeatherCacheImpl();
         String cacheAddress = "http://localhost:8080/WeatherChecker/services/WeatherCacheImplPort";
@@ -16,7 +16,7 @@ public class WeatherCacheServer {
     }
     
     public static void main(String args[]) throws Exception { 
-        new WeatherCacheServer();
+        new RunServer();
         System.out.println("Server ready..."); 
         
         Thread.sleep(50 * 60 * 1000); 
