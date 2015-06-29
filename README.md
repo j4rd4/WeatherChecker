@@ -14,7 +14,8 @@ Po spuštění serveru můžete spustit klientskou aplikaci skrze program Weathe
   1. Zadejte kód země, kde se cílová destinace nachází (CZ, SK, US, UK, ...)
   2. Zadejte poštovní směrovací číslo (kód) vybrané destinace
   3. Zobrazil se vám aktuální stav počasí v automaticky vyhodnocené nejbližší pozorované lokalitě
-  4. Pokud se nacházíte jinde (chcete vybrat jiné meteorologické stanoviště v blízkosti), stiskněte klávesu "y"
+  4. Pokud se nacházíte jinde (chcete vybrat jiné meteorologické stanoviště v blízkosti), stiskněte klávesu "y", pokud jste se získanými informacemi spokojeni, stiskněte "n" - program pak skončí
+  5. Pokud jste zvolili, že chcete jiný výběr místa, nabídne vám program několik sledovaných míst v okolí s přiřazenými čísly. Zadáním čísla si zobrazíte aktuální přehled počasí v této lokalitě. Současně také vytvoříte vazbu mezi hledaným PSČ a vybranou lokalitou, takže při příštím dotazu na stejné PSČ se zobrazí informace rovnou pro tuto lokalitu.
 
 ## Pro vývojáře
 
